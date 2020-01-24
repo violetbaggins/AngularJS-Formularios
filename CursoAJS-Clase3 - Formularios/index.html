@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clase 1 AJS</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+
+    <script src="https://code.angularjs.org/1.7.9/angular-animate.min.js"></script>
+
+
+    <script src="js/controlador.js"></script>
+
+
+</head>
+
+<body ng-app="miApp">
+
+    <div class="container-fluid">
+        <div ng-controller="miCtrl">
+            <div class="jumbotron mt-3">
+
+                <h1>{{mensaje}}</h1>
+                <br>
+
+                <form name="formulario" novalidate autocomplete="off" class="">
+                    <div class="form-group">
+                        <label for="nombre" class="">Nombre: </label>
+                        <input ng-model="formu.nombre" id="nombre" name="nombre" required type="text" class="form-control">
+                    </div>
+                    <!-- VALIDACION DE NOMBRE EN UN DIV -->
+                    <div class="alert alert-danger" ng-show="formulario.nombre.$invalid && formulario.nombre.$dirty">
+                            <div ng-show="formulario.nombre.$error.required">Campo Requerido</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edad" class="">Edad: </label>
+                        <input ng-model="formu.edad" id="edad" name="edad" type="number" class="form-control" required min="18">
+                    </div>
+                    <!-- VALIDACION DE EDAD EN UN DIV -->
+                    <div class="alert alert-danger" ng-show="formulario.edad.$invalid && formulario.edad.$dirty">
+                            <div ng-show="formulario.edad.$error.required">Campo Requerido</div>
+                            <div ng-show="formulario.edad.$error.min">Para mayores de 18 años</div>
+                            <div ng-show="formulario.edad.$error.number">ingrese solo numeros</div>
+                    </div>
+
+                    <!-- BOTON QUE TIENE NG-DISABLED -->
+                    <!-- <button class="btn btn-success mt-3" ng-disabled="formulario.$invalid" ng-click="enviar()">Enviar</button> -->
+
+                    <button class="btn btn-success mt-3" ng-click="enviar()">Enviar</button>
+                </form>
+                <div ng-show="formuSend" ng-class="{'alert':true, 'alert-warning':formuError, 'alert-success':!formuError, 'mt-3':true}">
+                    <div ng-show="formuError">Datos erroneos en formulario</div>
+                    <div ng-show="!formuError">Datos enviados correctamente</div>
+                    
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
